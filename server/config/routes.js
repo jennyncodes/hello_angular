@@ -11,7 +11,7 @@ module.exports = function(app){
     app.get('/tasks/:id', function(req, res){
         tasks.showOne(req, res);
     })
-    app.post('/tasks/:title/:desc', function(req, res){
+    app.post('/tasks', function(req, res){
         tasks.create(req, res);
     })
     app.put('/tasks/:id', function(req, res){

@@ -25,8 +25,8 @@ module.exports={
     create: function(req, res){
         console.log(req.body);
         var task = new Task({
-            title: req.params.title,
-            description: req.params.desc,
+            title: req.body.title,
+            description: req.body.description,
             completed: req.body.completed
         });
     
@@ -39,7 +39,7 @@ module.exports={
         })
 
     },
-    update: function(res, res){
+    update: function(req, res){
         var obj = {};
         if (req.body.title) {
             obj['title'] = req.body.title;
@@ -50,11 +50,12 @@ module.exports={
         if (req.body.completed != null) {
             obj['completed'] = req.body.completed;
         }
-        obj['updated_at'] = Date.now();
+     
         Task.update({ _id: req.params.id }, {
             $set: obj
         }, function (err, task) {
             if (err) {
+                console.log("error in controller");
                 res.json({ message: "Error", error: err })
             } else {
                 res.json({ message: "Success", data: task })
